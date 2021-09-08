@@ -1,0 +1,28 @@
+<div class="body">
+    <div class="container">
+        <h1 class="text-center">Sign Up</h1>
+        <form #f="ngForm" (ngSubmit)="sign(f)">
+            <input ngModel type="text" #name="ngModel" name="name" class="form-control" placeholder="Enter Your Name" required>
+            <div class="alert alert-danger" *ngIf="name.invalid && name.touched">This Field Is Empty</div>
+    
+            <input ngModel type="email" name="email" #email="ngModel" class="form-control" placeholder="Enter Your Email" required email>
+            <div class="alert alert-danger" *ngIf="email.touched && email.errors?.required">This Field Is Empty</div>
+            <div class="alert alert-danger" *ngIf="email.touched && email.errors?.email">Your Input Not Email</div>
+
+            <input ngModel type="password" #password="ngModel" name="password" class="form-control" placeholder="Enter Your Password" required minlength="6">
+            <div class="alert alert-danger" *ngIf="password.touched && password.errors?.required">This Field Is Empty</div>
+            <div class="alert alert-danger" *ngIf="password.touched && password.errors?.minlength">Your Password Is Less</div>
+
+            <input ngModel type="password" #passwordConfirm="ngModel" name="passwordConfirm" class="form-control" placeholder="Enter Your Password Confirm" required>
+            <div class="alert alert-danger" *ngIf="passwordConfirm.invalid && passwordConfirm.touched">This Field Is Empty</div>
+            <div class="alert alert-danger" *ngIf="password.value !== passwordConfirm.value && passwordConfirm.touched">Paswords Not Equl</div>
+
+            
+            <input ngModel type="text" name="address" class="form-control" placeholder="Enter Your Address" required>
+    
+            <button class="btn btn-primary" [disabled]="f.invalid || password.value !== passwordConfirm.value">Create Account</button>
+        </form>
+        <br>
+        <div class="alert alert-danger" *ngIf="errorMassage">{{ errorMassage }}</div>
+    </div>
+</div>
